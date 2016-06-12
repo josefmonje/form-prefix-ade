@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Manage Users{% endblock %}
+{% block h1_title %}Editing Account{% endblock %}
+{% block breadcrumbs %}
+    <li><a href="{% url 'users_list' %}">Manage Users</a></li>
+    <li>Edit Account</li>
+{% endblock %}
+{% block content %}
+    {% if form.errors %}
+        {% include "form_errors.html" %}
+    {% endif %}
+    <div class="row clearfix">
+        <div class="col_9">
+            <form action="" method="post">{% csrf_token %}
+            <div class="widget clearfix">
+                <h2>Account Information</h2>
+                <div class="widget_inside clearfix">
+                    <div class="col_3">
+                        <h3>Name &amp; Email</h3>
+                    </div>
+                    <div class="col_6 last">
+                        <div class="form">
+                            <div class="clearfix{% if form.email.errors %} red-highlight{% endif %}">
+                                <label for="{{ form.email.auto_id }}">{{ form.email.label }}</label>
+                                <div class="input">{{ form.email|add_class:"large" }} <br>{{ form.email_verified }}{{ form.email_verified.label }}</div>
+                            </div>
+                            <div class="clearfix{% if form.first_name.errors %} red-highlight{% endif %}">
+                                <label for="{{ form.first_name.auto_id }}">{{ form.first_name.label }}</label>
+                                <div class="input">{{ form.first_name|add_class:"large" }}</div>
+                            </div>
+                            <div class="clearfix{% if form.last_name.errors %} red-highlight{% endif %}">
+                                <label for="{{ form.last_name.auto_id }}">{{ form.last_name.label }}</label>
+                                <div class="input">{{ form.last_name|add_class:"large" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget_inside clearfix">
+                    <div class="col_3">
+                        <h3>Address &amp; Location</h3>
+                    </div>
+                    <div class="col_6 last">
+                        <div class="form">
+                            <div class="clearfix{% if form.address.errors %} red-highlight{% endif %}">
+                                <label for="{{ form.address.auto_id }}">{{ form.address.label }}</label>
+                                <div class="input">{{ form.address|add_class:"xlarge" }}</div>
+                            </div>
+                            <div class="clearfix{% if form.address_2.errors %} red-highlight{% endif %}">
+                                <label for="{{ form.address_2.auto_id }}">{{ form.address_2.label }}</label>
+                                <div class="input">{{ form.address_2|add_class:"xlarge" }}</div>
+                            </div>
+                            <div class="clearfix{% if form.city.errors %} red-highlight{% endif %}">
+                                <label for="{{ form.city.auto_id }}">{{ form.city.label }}</label>
+                                <div class="input">{{ form.city|add_class:"large" }}</div>
+                            </div>
+                            <div class="clearfix{% if form.state.errors %} red-highlight{% endif %}">
+                                <label for="{{ form.state.auto_id }}">{{ form.state.label }}</label>
+                                <div class="input">{{ form.state|add_class:"large" }}</div>
+                            </div>
+                            <div class="clearfix{% if form.country.errors %} red-highlight{% endif %}">
+                                <label for="{{ form.country.auto_id }}">{{ form.country.label }}</label>
+                                <div class="input">{{ form.country }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget_inside clearfix">
+                    <div class="col_3">
+                        &nbsp;
+                    </div>
+                    <div class="col_6 last">
+                            <input type="submit" name="{{ form.prefix }}" class="large blue button" value="Update User">
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col_9">
+            <form action="" method="post">{% csrf_token %}
+            <div class="widget clearfix">
+                <h2>Financial Information</h2>
+                <div class="widget_inside clearfix">
+                    <div class="col_3">
+                        <h3>Financial Settings</h3>
+                    </div>
+                    <div class="col_6 last">
+                        <div class="form">
+                            <div class="clearfix{% if financial.publisher_owner.errors %} red-highlight{% endif %}">
+                                <label for="{{ financial.publisher_owner.auto_id }}">{{ financial.publisher_owner.label }}</label>
+                                <div class="input">{{ financial.publisher_owner|add_class:"large" }}</div>
+                            </div>
+                            <div class="clearfix{% if financial.payment_method.errors %} red-highlight{% endif %}">
+                                <label for="{{ financial.payment_method.auto_id }}">{{ financial.payment_method.label }}</label>
+                                <div class="input">{{ financial.payment_method|add_class:"large" }}</div>
+                            </div>
+                            <div class="clearfix{% if financial.payment_email.errors %} red-highlight{% endif %}">
+                                <label for="{{ financial.payment_email.auto_id }}">{{ financial.payment_email.label }}</label>
+                                <div class="input">{{ financial.payment_email|add_class:"large" }}</div>
+                            </div>
+                            <div class="clearfix{% if financial.payment_email.errors %} red-highlight{% endif %}">
+                                <label for="{{ financial.payment_terms.auto_id }}">{{ financial.payment_terms.label }}</label>
+                                <div class="input">{{ financial.payment_terms|add_class:"large" }}</div>
+                            </div>
+                            <div class="clearfix{% if financial.payment_email.errors %} red-highlight{% endif %}">
+                                <label for="{{ financial.payment_minimum.auto_id }}">{{ financial.payment_minimum.label }}(USD)</label>
+                                <div class="input">{{ financial.payment_minimum|add_class:"large" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget_inside clearfix">
+                    <div class="col_3">
+                        &nbsp;
+                    </div>
+                    <div class="col_6 last">
+                            <input type="submit" name="{{ financial.prefix }}" class="large blue button" value="Update Settings">
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

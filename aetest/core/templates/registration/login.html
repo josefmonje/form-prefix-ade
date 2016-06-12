@@ -1,0 +1,72 @@
+{% load static %}
+{% load widget_tweaks %}
+<!doctype html>
+<html lang="en-us">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" >
+	<meta charset="utf-8">
+	<title>Login | AdEngage ACP</title>
+    <meta name="robots" content="noindex" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- The Columnal Grid and mobile stylesheet -->
+	<link rel="stylesheet" href="{% static "styles/columnal/columnal.css" %}" type="text/css" media="screen" />
+
+	<!-- Fixes for IE -->
+	<!--[if lt IE 9]>
+            <link rel="stylesheet" href="{% static "styles/columnal/ie.css" %}" type="text/css" media="screen" />
+            <link rel="stylesheet" href="{% static "styles/ie8.css" %}" type="text/css" media="screen" />
+            <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+	<![endif]-->
+
+	<!-- Now that all the grids are loaded, we can move on to the actual styles. -->
+        <link rel="stylesheet" href="{% static "scripts/jqueryui/jqueryui.css" %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static "styles/style.css" %}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{% static "styles/global.css" %}" type="text/css" media="screen" />
+		<link rel="stylesheet" href="{% static "styles/config.css" %}" type="text/css" media="screen" />
+
+</head>
+<body id="login">
+<div class="container">
+    <div class="row">
+        
+        <a href="{% url 'home' %}" class="center block"><img src="{% static "images/ae_logo_r2.png" %}" /></a>
+        {% if form.errors %}
+        <script>alert('Your login details are invalid.');</script>
+        {% endif %}
+        <div class="col_6 pre_3 padding_top_60">
+            <div class="widget clearfix">
+                <h2>Staff Login</h2>
+                <div class="widget_inside">
+                    <p class="margin_bottom_15">Please enter your AdEngage staff account email address and password to login.</p>
+                    <form action="{% url 'django.contrib.auth.views.login' %}" method="post" id="login_form">{% csrf_token %}
+                    <div class="form">
+                        <div class="clearfix login_field">
+                            {{ form.username.label_tag }}
+                            <div class="input">
+                                {{ form.username|add_class:"xlarge" }}
+                            </div>
+                        </div>
+                        <div class="clearfix login_field">
+                            {{ form.password.label_tag }}
+                            <div class="input">
+                                {{ form.password|add_class:"xlarge" }}
+                            </div>
+                        </div>
+                        <div class="clearfix grey-highlight">
+                            <div class="input no-label ">
+                                <input class="button blue" type="submit" name="submit" value="Login">
+                                <a href="http://www.adengage.com/" class="button"><span>Home</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="next" value="{{ next|default:"/" }}" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Manage Users{% endblock %}
+{% block h1_title %}User Accounts{% endblock %}
+{% block breadcrumbs %}
+    <li><a href="{% url 'users_list' %}">Manage Users</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="row clearfix">
+    <div class="widget clearfix">
+        <h2>AdEngage User Accounts</h2>
+        <div class="widget_inside">
+            <div class="col_12">
+                <table id="users_table" class="datatable">
+                    <thead>
+                        <tr>
+                            <th class="align-left">Username</th>
+                            <th class="align-left">Email</th>
+                            <th class="align-left">Name</th>
+                            <th class="align-left">Surname</th>
+                            <th class="align-left">Payment Method</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for u in userprofile_list %}
+                        <tr>
+                            <td>{{ u.username }}</td>
+                            <td>{{ u.email }}</td>
+                            <td>{{ u.first_name }}</td>
+                            <td>{{ u.last_name }}</td>
+                            <td>
+                                {% for p in userfinancialsettings_list %}
+                                    {% if p.user == u %}
+                                        {{ p.payment_method }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td><a href="{% url 'edit_user' u.pk %}" title="Edit account"><img src="{% static "images/icons/user--pencil.png" %}" alt="Edit Account"></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+$(function() {
+    $('#users_table').dataTable({
+        'sPaginationType': 'full_numbers',
+        'iDisplayLength' : 25,
+        "bJQueryUI" : true,
+        "aoColumns": [
+            { "bSearchable": true},
+            { "bSearchable": true},
+            { "bSearchable": true},
+            { "bSearchable": false},
+            { "bSearchable": false},
+            { "bSearchable": false, "bSortable" : false}
+        ],
+        "aaSorting": [[0, 'desc']]
+    });
+});
+</script>
+{% endblock %}

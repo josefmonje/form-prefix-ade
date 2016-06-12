@@ -1,0 +1,19 @@
+<div class="row clearfix">
+    <span class="notification undone">
+    <p><strong>The system could not process this form.</strong></p>
+        {{ form.non_field_errors }}
+        <ul class="disc">
+        {% for field in form %}
+            {% if field.errors %}
+            <li>{{ field.label }}
+                <ul class="disc">
+                    {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </span>
+</div>
